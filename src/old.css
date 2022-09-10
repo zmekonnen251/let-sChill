@@ -1,3 +1,5 @@
+/* We designed it with a desktop first approach to design */
+
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +10,11 @@
 body {
   position: relative;
   background-color: #4e4e4e;
+}
+
+.desktopoff,
+.navmobile {
+  display: none;
 }
 
 .header {
@@ -33,42 +40,49 @@ footer a {
   transition: 0.5s;
 }
 
-.hamburger-icon{
-  color: wheat;
-  cursor: pointer;
-}
-
-.active{
-  display:none;
-}
-
-.nav-bar{
-  background-color: #110a0a;
-  z-index: 2; 
-}
-
 .nav a {
   text-decoration: none;
   color: rgb(245, 245, 245);
 }
 
-.nav-header {
+.nav a h2 {
   font-family: 'Mochiy Pop One', sans-serif;
   animation: bouge 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   animation-iteration-count: 1;
   transform: translateX(0);
 }
 
-.nav-bar{
-  background-color: #110a0a;
-  z-index: 2; 
+@keyframes bouge {
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+
+  20%,
+  80% {
+    transform: translateX(2px);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translateX(-4px);
+  }
+
+  40%,
+  60% {
+    transform: translateX(4px);
+  }
+}
+
+.nav ul {
+  display: flex;
+  font-size: 19px;
 }
 
 li {
   list-style-type: none;
-  text-align: center;
-  display: inline-block;
-  margin: 0 15px;
+  margin-right: 20px;
 }
 
 .movieDescTop a {
@@ -114,10 +128,9 @@ footer a:hover {
 }
 
 .image-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
 }
 
 .image-container .movie {
@@ -211,8 +224,6 @@ footer a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  padding: 0 15%;
 }
 
 .comment-list-container {
@@ -222,8 +233,8 @@ footer a:hover {
 .x-icon {
   position: fixed;
   width: 35px;
-  top: 10px;
-  right: 20px;
+  top: 20px;
+  right: 70px;
 }
 
 .summary {
@@ -239,18 +250,16 @@ form {
   flex-direction: column;
   gap: 15px;
   margin: 50px auto;
-  /* text-align: center; */
-  padding: 30px;
 }
 
 form h3 {
-  /* align-self: center; */
+  align-self: center;
   padding: 1rem 0;
   font-size: 1.3rem;
 }
 
 input[type='text'] {
-  width: 250px;
+  width: 200px;
   padding: 3px;
   border: 2px solid black;
 }
@@ -297,3 +306,160 @@ input::placeholder {
 }
 
 /* Mobile-responsive */
+
+@media screen and (max-width: 692px) {
+  /* Movies section */
+
+  .mobileoff {
+    display: none;
+  }
+
+  .nav a {
+    font-size: 14px;
+  }
+
+  .image-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main {
+    position: relative;
+    top: 140px;
+    bottom: 50px;
+    margin-bottom: 170px;
+  }
+
+  .image-container .movie img {
+    max-width: 100%;
+  }
+
+  .movieDescTop a {
+    cursor: pointer;
+    transition: 0.5s;
+  }
+
+  .movieDesc > p {
+    position: absolute;
+    right: 0;
+    margin-bottom: 15px;
+  }
+
+  .movieBtn button {
+    padding: 7px;
+    width: 100%;
+    font-size: 16px;
+    transition: 1.5s;
+  }
+
+  /* Comment popup */
+  .summary {
+    width: 70%;
+    text-align: center;
+  }
+
+  .x-icon {
+    right: 35px;
+  }
+
+  .comment-list-container {
+    width: 300px;
+    margin: 0 auto;
+  }
+
+  .comment-form-container {
+    width: 300px;
+    margin: 0 auto;
+  }
+
+  form h3 {
+    align-self: normal;
+    text-align: justify;
+  }
+} 
+
+/* @media (min-width: 768px) {
+  .dn {
+    display: block;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  position: relative;
+  background-color: #4e4e4e;
+}
+
+.hamburger-icon{
+  color: wheat;
+  cursor: pointer;
+}
+
+.active{
+  display:none;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: #110a0a;
+  z-index: 1;
+}
+
+.header .nav {
+  margin: 0 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: underline;
+  transition: 0.5s;
+}
+
+.nav a {
+  text-decoration: none;
+  color: rgb(245, 245, 245);
+}
+
+.nav-header {
+  font-family: 'Mochiy Pop One', sans-serif;
+  animation: bouge 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  animation-iteration-count: 1;
+  transform: translateX(0);
+}
+
+.nav-bar{
+  background-color: #110a0a;
+  z-index: 2; 
+}
+
+.mobile-close-btn{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  color: wheat;
+  cursor: pointer;
+}
+
+.nav ul li{
+  list-style: none;
+  text-align: center;
+  display: inline-block;
+  margin: 0 15px;
+}
+
+.movieDescTop a {
+  cursor: pointer;
+  transition: 0.5s;
+}

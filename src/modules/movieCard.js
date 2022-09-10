@@ -1,9 +1,9 @@
 import { addToInvolvement } from './toInvolvementAPI.js';
 
-const movieCard = (result, involvementLikes, i) => {
+const movieCard = (result, involvementLikes) => {
   const movie = document.createElement('div');
   movie.classList.add('movie');
-  movie.id = i;
+  movie.id = result.id;
 
   const img = document.createElement('img');
   img.alt = 'Movie Image';
@@ -33,13 +33,13 @@ const movieCard = (result, involvementLikes, i) => {
     .then((response) => response.json())
     .then((result) => {
       const filteredResult = result.filter((r) => r.item_id === `${result.id}`);
-      likeSpan.textContent = filteredResult[0].likes;
-      clicked = filteredResult[0].likes;
+      likeSpan.textContent = filteredResult[0]?.likes;
+      clicked = filteredResult[0]?.likes;
     });
 
   like.addEventListener('click', () => {
     clicked += 1;
-    addToInvolvement(involvementLikes, movie.id, clicked);
+    addToInvolvement(involvementLikes, result.id, clicked);
     likeSpan.textContent = clicked;
   });
 

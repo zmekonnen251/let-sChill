@@ -7,11 +7,11 @@ const baseMovieURL = 'https://api.tvmaze.com/shows/';
 const involvementLikes = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ADIK65sjpCXvzrCJe3B4/likes/';
 const involvementComments = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ADIK65sjpCXvzrCJe3B4/comments/';
 const movieWrapper = document.querySelector('.image-container');
-let movieCount = 0;
+const movieCount = [];
 
 const displayMoives = async (baseMovieURL) => {
   for (let i = 20; i < 32; i += 1) {
-    movieCount += 1;
+    movieCount.push(i);
     fetch(baseMovieURL + i)
       .then((response) => response.json())
       .then((result) => {
@@ -23,8 +23,8 @@ const displayMoives = async (baseMovieURL) => {
         summary.classList.add('summary');
         genere.textContent = result.genres;
         reservation.textContent = 'Reservation';
-        const movie = movieCard(result, i, involvementLikes);
-        const comment = commentPopUp(involvementComments, i, result);
+        const movie = movieCard(result, involvementLikes);
+        const comment = commentPopUp(involvementComments, result.id, result);
         movieBtn.append(comment, reservation);
         movie.append(movieBtn);
         movieWrapper.appendChild(movie);
@@ -36,6 +36,14 @@ const displayMoives = async (baseMovieURL) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   displayMoives(baseMovieURL);
+});
+
+const logo = document.querySelector('.nav-header');
+const mobileMenu = document.querySelector('.hamburger-icon');
+const navBar = document.querySelector('.nav-bar');
+mobileMenu.addEventListener('click', () => {
+  navBar.classList.toggle('active');
+  logo.classList.toggle('active');
 });
 
 export default involvementLikes;
