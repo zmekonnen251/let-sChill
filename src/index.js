@@ -4,7 +4,6 @@ import movieCard from './modules/movieCard.js';
 import commentPopUp from './modules/commentPopUp.js';
 
 const baseMovieURL = 'https://api.tvmaze.com/shows/';
-const involvementLikes = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ADIK65sjpCXvzrCJe3B4/likes/';
 const involvementComments = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ADIK65sjpCXvzrCJe3B4/comments/';
 const movieWrapper = document.querySelector('.image-container');
 const movieCount = [];
@@ -23,7 +22,7 @@ const displayMoives = async (baseMovieURL) => {
         summary.classList.add('summary');
         genere.textContent = result.genres;
         reservation.textContent = 'Reservation';
-        const movie = movieCard(result, involvementLikes);
+        const movie = movieCard(result);
         const comment = commentPopUp(involvementComments, result.id, result);
         movieBtn.append(comment, reservation);
         movie.append(movieBtn);
@@ -45,5 +44,3 @@ mobileMenu.addEventListener('click', () => {
   navBar.classList.toggle('active');
   logo.classList.toggle('active');
 });
-
-export default involvementLikes;

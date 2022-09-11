@@ -1,6 +1,7 @@
 import { addToInvolvement } from './toInvolvementAPI.js';
 
-const movieCard = (result, involvementLikes) => {
+const involvementLikes = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ADIK65sjpCXvzrCJe3B4/likes/';
+const movieCard = (result) => {
   const movie = document.createElement('div');
   movie.classList.add('movie');
   movie.id = result.id;
@@ -31,8 +32,8 @@ const movieCard = (result, involvementLikes) => {
   let clicked;
   fetch(involvementLikes, { method: 'GET' })
     .then((response) => response.json())
-    .then((result) => {
-      const filteredResult = result.filter((r) => r.item_id === `${result.id}`);
+    .then((res) => {
+      const filteredResult = res.filter((r) => r.item_id === `${result.id}`);
       likeSpan.textContent = filteredResult[0]?.likes;
       clicked = filteredResult[0]?.likes;
     });
